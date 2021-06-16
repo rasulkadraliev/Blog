@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 /**
- * Show Task Dashboard
+ * Show Notes
  */
 Route::get('/', function () {
     $notes = Blog::orderBy('created_at', 'asc')->get();
@@ -33,18 +33,20 @@ Route::post('/hello', function (Request $request) {
     }
 
     $blog = new Blog;
-    $blog->header = $request->title;
+    $blog->title = $request->title;
     $blog->text = $request->text;
     $blog->author = $request->author;
-    $blog->published = $request->get('published') ?? false;
+    $blog->published = $request->get('published') ?? true;
     $blog->date_published = date('Y-m-d H:i:s');
     $blog->save();
 
     return redirect('/');});
 
 /**
- * Удалить задачу
+ * Delete a blog note
  */
-Route::delete('/note/{note}', function (Blog $task) {
-    //
+Route::delete('/note/{note}', function (Blog $note) {
+    $note->delete();
+
+    return redirect('/');
 });
