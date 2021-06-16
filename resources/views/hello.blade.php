@@ -75,7 +75,7 @@
     </head>
     <body>
         <div class="container">
-            <form action="{{ url('/')}}" method="POST" class="form-horizontal">
+            <form action="{{ url('/hello')}}" method="POST" class="form-horizontal">
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="col-25">
@@ -133,7 +133,7 @@
                             <tbody>
                             @foreach ($notes as $blog)
                                 <tr>
-                                    <td class="table-text"><div>{{ $note->header }}</div></td>
+                                    <td class="table-text"><div>{{ $blog->header }}</div></td>
 
                                     <!-- Task Delete Button -->
                                     <td>

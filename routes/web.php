@@ -19,9 +19,9 @@ Route::get('/', function () {
 /**
  * Create a blog note
  */
-Route::post('/', function (Request $request) {
+Route::post('/hello', function (Request $request) {
     $validator = Validator::make($request->all(), [
-        'header' => 'required|max:50',
+        'title' => 'required|max:50',
         'text' => 'required',
         'author' => 'required|max:50',
     ]);
@@ -33,11 +33,11 @@ Route::post('/', function (Request $request) {
     }
 
     $blog = new Blog;
-    $blog->header = $request->header;
+    $blog->header = $request->title;
     $blog->text = $request->text;
     $blog->author = $request->author;
     $blog->published = $request->get('published') ?? false;
-    $blog->date_published = $request->date_published;
+    $blog->date_published = date('Y-m-d H:i:s');
     $blog->save();
 
     return redirect('/');});
