@@ -13,7 +13,7 @@
                 @include('errors')
 
                 <!-- New Note Form -->
-                    <form action="{{ url('hello')}}" method="POST" class="form-horizontal">
+                    <form action="{{ url('index')}}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
 
                     <!-- Blog Note -->
