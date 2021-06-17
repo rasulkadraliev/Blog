@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Validator;
 /**
  * Show Notes
  */
-Route::get('/', function () {
-    $notes = Blog::orderBy('created_at', 'asc')->get();
-        return view('hello', [
-            'notes' => $notes
-        ]);
-});
+Route::get('/', 'Blog\BlogController@index')->name('blog.index');
 
 /**
  * Create a blog note
