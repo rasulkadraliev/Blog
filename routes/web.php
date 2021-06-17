@@ -21,9 +21,9 @@ Route::get('/', function () {
  */
 Route::post('/hello', function (Request $request) {
     $validator = Validator::make($request->all(), [
-        'title' => 'required|max:50',
-        'text' => 'required',
-        'author' => 'required|max:50',
+        'title' => 'required|max:35',
+        'text' => 'required|max:255',
+        'author' => 'required|max:35',
     ]);
 
     if ($validator->fails()) {

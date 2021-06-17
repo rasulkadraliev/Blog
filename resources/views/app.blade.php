@@ -16,6 +16,12 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
+        /*table{*/
+        /*    table-layout: fixed;*/
+        /*}*/
+        td {
+            word-break: break-all;
+        }
         body {
             font-family: 'Lato', serif;
         }

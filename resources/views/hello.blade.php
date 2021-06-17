@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col-sm-offset-2 col-sm-8">
+        <div class="col-sm-offset-1 col-sm-16">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     New Blog Entry
@@ -12,11 +12,11 @@
                     <!-- Display Validation Errors -->
                 @include('errors')
 
-                <!-- New Task Form -->
+                <!-- New Note Form -->
                     <form action="{{ url('hello')}}" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
 
-                    <!-- Task Name -->
+                    <!-- Blog Note -->
                         <div class="form-group">
                             <label for="title" class="col-sm-3 control-label">Title</label>
 
@@ -39,11 +39,11 @@
                             </div>
                         </div>
 
-                        <!-- Add Task Button -->
+                        <!-- Add Note Button -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-btn fa-plus"></i>Add Blog Note
+                                    <i class="fa fa-btn fa-plus"></i>Add Note
                                 </button>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <!-- Current Tasks -->
+            <!-- Current Notes -->
             @if (count($notes) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -59,17 +59,24 @@
                     </div>
 
                     <div class="panel-body">
-                        <table class="table table-striped task-table">
+                        <table class="table table-striped">
                             <thead>
-                            <th>Note</th>
-                            <th>&nbsp;</th>
+                            <tr>
+                                <th width="200px">Title</th>
+                                <th width="230px">Author</th>
+                                <th width="100px">Date</th>
+                                <th>Blog post</th>
+                            </tr>
                             </thead>
                             <tbody>
                             @foreach ($notes as $note)
                                 <tr>
-                                    <td class="table-text"><div>{{ $note->title }}</div></td>
+                                    <td width="150px" class="table-text"><div>{{ $note->title }}</div></td>
+                                    <td width="170px" class="table-text"><div>{{ $note->author }}</div></td>
+                                    <td width="100px" class="table-text"><div>{{ $note->date_published }}</div></td>
+                                    <td class="table-text"><div>{{ $note->text }}</div></td>
 
-                                    <!-- Task Delete Button -->
+                                    <!-- Note Delete Button -->
                                     <td>
                                         <form action="{{ url('note/'.$note->id) }}" method="POST">
                                             {{ csrf_field() }}
