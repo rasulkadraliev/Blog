@@ -21,10 +21,12 @@ class BlogController extends Controller {
     public function index() {
 
         $notes = Blog::orderBy('created_at', 'asc')->get();
+//        dd($notes);
         return view('index', [
             'notes' => $notes
         ]);
     }
+
 
     public function add_note(Request $request) {
         $validator = Validator::make($request->all(), [
@@ -46,10 +48,10 @@ class BlogController extends Controller {
             $blog->author = $request->author;
             switch ($request->published) {
                 case "on":
-                    $blog->published = 1;
+                    $blog->published = 'Yes';
                     break;
                 default:
-                    $blog->published = 0;
+                    $blog->published = 'No';
             }
             $blog->date_published = date('Y-m-d H:i:s');
             $blog->save();
@@ -71,8 +73,17 @@ class BlogController extends Controller {
     public function notes_list() {
 
         $notes = Blog::orderBy('created_at', 'asc')->get();
+        $is_published = 'No';
+        foreach ($notes as $note)
+            if ($note->published == 'Yes') {
+                $is_published = 'Yes';
+                break;
+            }
+
+//        dd($is_published);
         return view('notes', [
-            'notes' => $notes
+            'notes' => $notes,
+            'is_published' => $is_published
         ]);
     }
 }

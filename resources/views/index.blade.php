@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col-sm-offset-1 col-sm-16">
+        <div class="col-sm-offset-0 col-sm-16">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     New Blog Entry
@@ -72,6 +72,7 @@
                                 <th width="200px">Title</th>
                                 <th width="230px">Author</th>
                                 <th width="100px">Date</th>
+                                <th width="100px">Published</th>
                                 <th>Blog post</th>
                             </tr>
                             </thead>
@@ -81,6 +82,7 @@
                                     <td width="150px" class="table-text"><div>{{ $note->title }}</div></td>
                                     <td width="170px" class="table-text"><div>{{ $note->author }}</div></td>
                                     <td width="100px" class="table-text"><div>{{ $note->date_published }}</div></td>
+                                    <td width="100px" class="table-text" style='text-align:center'><div>{{ $note->published }}</div></td>
                                     <td class="table-text"><div>{{ $note->text }}</div></td>
 
                                     <!-- Note Delete Button -->

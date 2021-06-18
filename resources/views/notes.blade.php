@@ -5,7 +5,7 @@
         <div class="col-sm-offset-0 col-sm-16">
 
             <!-- Current Notes -->
-            @if (count($notes) > 0)
+            @if ($is_published == 'Yes')
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Blog Notes
@@ -23,7 +23,7 @@
                             </thead>
                             <tbody>
                             @foreach ($notes as $note)
-                                @if ($note->published == '1')
+                                @if ($note->published == 'Yes')
                                     <tr>
                                         <td width="150px" class="table-text"><div>{{ $note->title }}</div></td>
                                         <td width="170px" class="table-text"><div>{{ $note->author }}</div></td>
