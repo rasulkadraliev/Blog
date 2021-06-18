@@ -38,12 +38,19 @@ class BlogController extends Controller {
                 ->withInput()
                 ->withErrors($validator);
         }
+//            dd($request);
 
             $blog = new Blog;
             $blog->title = $request->title;
             $blog->text = $request->text;
             $blog->author = $request->author;
-            $blog->published = $request->get('published') ?? true;
+            switch ($request->published) {
+                case "on":
+                    $blog->published = 1;
+                    break;
+                default:
+                    $blog->published = 0;
+            }
             $blog->date_published = date('Y-m-d H:i:s');
             $blog->save();
 
@@ -54,5 +61,18 @@ class BlogController extends Controller {
         $note->delete();
 
         return redirect('/');
+    }
+
+    /**
+     * Current notes list page
+     *
+     * @return string
+     */
+    public function notes_list() {
+
+        $notes = Blog::orderBy('created_at', 'asc')->get();
+        return view('notes', [
+            'notes' => $notes
+        ]);
     }
 }

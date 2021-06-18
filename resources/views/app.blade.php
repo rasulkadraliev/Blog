@@ -16,9 +16,18 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
-        /*table{*/
-        /*    table-layout: fixed;*/
-        /*}*/
+        input[type="checkbox"] {
+            width: 25px;
+            height: 25px;
+            background: transparent;
+            -webkit-appearance: checkbox;
+            -moz-appearance: checkbox;
+            appearance: auto;
+            position: relative;
+            /*left: -3px;*/
+            top: -5px;
+            cursor: pointer;
+        }
         td {
             word-break: break-all;
         }

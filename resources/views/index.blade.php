@@ -18,30 +18,37 @@
 
                     <!-- Blog Note -->
                         <div class="form-group">
-                            <label for="title" class="col-sm-3 control-label">Title</label>
+                            <label for="title" class="col-sm-2 control-label">Title</label>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-9">
                                 <input type="text" name="title" id="title" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="author" class="col-sm-3 control-label">Author</label>
+                            <label for="author" class="col-sm-2 control-label">Author</label>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-9">
                                 <input type="text" name="author" id="author" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="text" class="col-sm-3 control-label">Blog Text</label>
+                            <label for="text" class="col-sm-2 control-label">Blog Text</label>
 
-                            <div class="col-sm-6">
+                            <div class="col-sm-9">
                                 <textarea name="text" id="text" class="form-control" style="height:200px; resize: none"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="published" class="col-sm-2 control-label">Publish? (Y/N)</label>
+
+                            <div class="col-sm-1">
+                                <input type="checkbox" name="published" id="published" class="form-control">
                             </div>
                         </div>
 
                         <!-- Add Note Button -->
                         <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-6">
+                            <div class="col-sm-offset-2 col-sm-6">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fa fa-btn fa-plus"></i>Add Note
                                 </button>
