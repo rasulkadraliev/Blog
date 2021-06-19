@@ -49,7 +49,7 @@
                         <!-- Add Note Button -->
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-6">
-                                <button type="submit" class="btn btn-default">
+                                <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-plus"></i>Add Note
                                 </button>
                             </div>
@@ -85,9 +85,18 @@
                                     <td width="100px" class="table-text" style='text-align:center'><div>{{ $note->published }}</div></td>
                                     <td class="table-text"><div>{{ $note->text }}</div></td>
 
+                                    <!-- Note Read Button -->
+                                    <td>
+                                        <form action="{{ url('notes/'.$note->id) }}" target="_blank" method="GET">
+
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fa fa-btn fa-eye"></i>Read
+                                            </button>
+                                        </form>
+                                    </td>
                                     <!-- Note Delete Button -->
                                     <td>
-                                        <form action="{{ url('note/'.$note->id) }}" method="POST">
+                                        <form action="{{ url('delete/'.$note->id) }}" method="POST">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 

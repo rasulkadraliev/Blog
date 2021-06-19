@@ -12,7 +12,8 @@ class Blog extends Model
      * @var string
      */
     protected $table = 'blog';
+    /**
+     * @var mixed
+     */
 }
-{
-    //
-}
+

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Blog;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -27,7 +28,24 @@ class BlogController extends Controller {
         ]);
     }
 
+    /**
+     * Read note
+     *
+     * @return string
+     */
 
+    public function read_note(Blog $note) {
+
+        return view('single_note', [
+            'note' => $note,
+        ]);
+    }
+
+    /**
+     * Add note: published or not
+     *
+     * @return string
+     */
     public function add_note(Request $request) {
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:35',
@@ -40,7 +58,6 @@ class BlogController extends Controller {
                 ->withInput()
                 ->withErrors($validator);
         }
-//            dd($request);
 
             $blog = new Blog;
             $blog->title = $request->title;
@@ -59,6 +76,12 @@ class BlogController extends Controller {
             return redirect('/');
     }
 
+    /**
+     * Delete note
+     *
+     * @return string
+     */
+
     public function delete_note(Blog $note) {
         $note->delete();
 
@@ -66,7 +89,7 @@ class BlogController extends Controller {
     }
 
     /**
-     * Current notes list page
+     * Published notes list
      *
      * @return string
      */
@@ -80,7 +103,6 @@ class BlogController extends Controller {
                 break;
             }
 
-//        dd($is_published);
         return view('notes', [
             'notes' => $notes,
             'is_published' => $is_published

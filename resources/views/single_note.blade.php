@@ -5,13 +5,21 @@
         <div class="col-sm-offset-0 col-sm-16">
 
             <!-- Current Notes -->
-            @if ($is_published == 'Yes')
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Blog Notes
                     </div>
 
                     <div class="panel-body">
+{{--                        Note is not published message--}}
+
+                    @if ($note->published == 'No')
+                        <!-- Form Error List -->
+                            <div class="alert alert-danger">
+                                <strong>Caution! This note is not published</strong>
+                            </div>
+                        @endif
+
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -22,29 +30,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($notes as $note)
-{{--                                THIS IS GOING TO BE --}}
-                                @if ($note->published == 'Yes')
                                     <tr>
                                         <td width="150px" class="table-text"><div>{{ $note->title }}</div></td>
                                         <td width="170px" class="table-text"><div>{{ $note->author }}</div></td>
                                         <td width="100px" class="table-text"><div>{{ $note->date_published }}</div></td>
                                         <td class="table-text"><div>{{ $note->text }}</div></td>
                                     </tr>
-                                @endif
-                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-{{--            MOVE TO SEPARATE TEMPLATE--}}
-            @else
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        No Published Blog Notes
-                    </div>
-                </div>
-            @endif
         </div>
     </div>
 @endsection
