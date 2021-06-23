@@ -15,7 +15,17 @@ Route::post('/index', 'Blog\BlogController@add_note')->name('blog.add_note');
 /**
  * Read a blog note
  */
-Route::get('/notes/{note}', 'Blog\BlogController@read_note')->name('blog.read_note');
+Route::get('/note/{note}', 'Blog\BlogController@read_note')->name('blog.read_note');
+
+/**
+ * Edit a blog note
+ */
+Route::get('/note/{note}/edit', 'Blog\BlogController@edit_note')->name('blog.edit_note');
+
+/**
+ * Save a blog note
+ */
+Route::post('/note/{note}/edit', 'Blog\BlogController@save_note')->name('blog.save_note');
 
 /**
  * Delete a blog note

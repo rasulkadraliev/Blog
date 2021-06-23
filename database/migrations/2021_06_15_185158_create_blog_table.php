@@ -19,7 +19,7 @@ class CreateBlogTable extends Migration
             $table->text('text');
             $table->string('author');
             $table->boolean('published');
-            $table->timestamp('date_published',0);
+            $table->date('date_published')->nullable();
             $table->timestamps();
         });
     }

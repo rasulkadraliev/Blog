@@ -14,7 +14,7 @@
 
                 <!-- New Note Form -->
                     <form action="{{ url('index')}}" method="POST" class="form-horizontal">
-                    {{ csrf_field() }}
+                    @csrf()
 
                     <!-- Blog Note -->
                         <div class="form-group">
@@ -71,8 +71,8 @@
                             <tr>
                                 <th width="200px">Title</th>
                                 <th width="230px">Author</th>
-                                <th width="100px">Date</th>
                                 <th width="100px">Published</th>
+                                <th width="100px">Date published</th>
                                 <th>Blog post</th>
                             </tr>
                             </thead>
@@ -81,26 +81,34 @@
                                 <tr>
                                     <td width="150px" class="table-text"><div>{{ $note->title }}</div></td>
                                     <td width="170px" class="table-text"><div>{{ $note->author }}</div></td>
-                                    <td width="100px" class="table-text"><div>{{ $note->date_published }}</div></td>
                                     <td width="100px" class="table-text" style='text-align:center'><div>{{ $note->published }}</div></td>
+                                    <td width="100px" class="table-text"><div>{{ $note->date_published }}</div></td>
                                     <td class="table-text"><div>{{ $note->text }}</div></td>
 
                                     <!-- Note Read Button -->
                                     <td>
-                                        <form action="{{ url('notes/'.$note->id) }}" target="_blank" method="GET">
+                                        <form action="{{ url('note/'.$note->id) }}" method="GET">
 
                                             <button type="submit" class="btn btn-success">
                                                 <i class="fa fa-btn fa-eye"></i>Read
                                             </button>
                                         </form>
                                     </td>
+                                    <!-- Note Edit Button -->
+                                    <td>
+                                        <form action="{{ url('note/'.$note->id .'/edit') }}" method="GET">
+
+                                            <button type="submit" class="btn btn-warning">
+                                                <i class="fa fa-btn fa-edit"></i>Edit
+                                            </button>
+                                        </form>
+                                    </td>
                                     <!-- Note Delete Button -->
                                     <td>
                                         <form action="{{ url('delete/'.$note->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
-                                            <button type="submit" class="btn btn-danger">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button onclick="return confirm('Are you sure you want to delete this note? This cannot be undone');" type="submit" class="btn btn-danger">
                                                 <i class="fa fa-btn fa-trash"></i>Delete
                                             </button>
                                         </form>
