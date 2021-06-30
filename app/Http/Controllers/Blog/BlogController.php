@@ -16,7 +16,7 @@ class BlogController extends Controller {
     /**
      * Index page
      *
-     * @return string
+     * @return string|mixed
      */
     public function index() {
 
@@ -27,77 +27,38 @@ class BlogController extends Controller {
     }
 
     /**
-     * Add note: published or not
+     * Add new or Save edited note
      *
-     * @return string
+     * @return string|mixed
      */
-    public function add_note(Request $request) {
+    public function add_note(Request $request, Blog $note) {
 
-//        Validation of text limits
-        $result = $this->validator_func($request);
-        if ($result->fails()) {
-            return redirect('/')
-                ->withInput()
-                ->withErrors($result);
-        }
-
-        $blog = new Blog;
-        $blog->title = $request->title;
-        $blog->text = $request->text;
-        $blog->author = $request->author;
-        switch ($request->published) {
-            case "on":
-                $blog->published = 'Yes';
-                $blog->date_published = date('Y-m-d H:i:s');
-                break;
-            default:
-                $blog->published = 'No';
-        }
-
-        $blog->save();
-
-        return redirect('/');
-    }
-
-    public function validator_func(Request $request)
-    {
+        // Validation of text conditions
         $validator = Validator::make($request->all(), [
             'title' => 'required|max:35',
             'text' => 'required|max:255',
             'author' => 'required|max:35',
         ]);
-
-        return $validator;
-    }
-
-    /**
-     * Save edited note
-     *
-     * @return string
-     */
-
-    public function save_note(Request $request, Blog $note) {
-
-//        Validation of text limits
-        $result = $this->validator_func($request);
-        if ($result->fails()) {
-            return redirect('/note/'. $note->id .'/edit')
+        if ($validator->fails()) {
+            return redirect('/')
                 ->withInput()
-                ->withErrors($result);
+                ->withErrors($validator);
+        }
+        // End of validation of text conditions
+
+        // Checking if a note does not already exist (and in this case creating a new note)
+        if (empty($note))
+            $note = new Blog;
+
+        $note->title = $request->title;
+        $note->text = $request->text;
+        $note->author = $request->author;
+        $note->published = 'No';
+        if ($request->published == "on") {
+            $note->published = 'Yes';
+            $note->date_published = date('Y-m-d H:i:s');
         }
 
-//        Assigning new values to a note
-        $note->title = $request->title;
-        $note->author = $request->author;
-        $note->text = $request->text;
-        switch ($request->published) {
-            case "on":
-                $note->published = 'Yes';
-                $note->date_published = date('Y-m-d H:i:s');
-                break;
-            default:
-                $note->published = 'No';
-        }
         $note->save();
 
         return redirect('/');
@@ -106,7 +67,7 @@ class BlogController extends Controller {
     /**
      * Read note
      *
-     * @return string
+     * @return string|mixed
      */
 
     public function read_note(Blog $note) {
@@ -118,7 +79,7 @@ class BlogController extends Controller {
     /**
      * Edit note
      *
-     * @return string
+     * @return string|mixed
      */
 
     public function edit_note(Blog $note) {
@@ -131,7 +92,7 @@ class BlogController extends Controller {
     /**
      * Delete note
      *
-     * @return string
+     * @return string|mixed
      */
 
     public function delete_note(Blog $note) {
@@ -144,7 +105,7 @@ class BlogController extends Controller {
     /**
      * Published notes list
      *
-     * @return string
+     * @return string|mixed
      */
     public function notes_list() {
 

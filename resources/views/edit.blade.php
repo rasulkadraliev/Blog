@@ -13,7 +13,7 @@
                 @include('errors')
 
                 <!-- Edit Note Form -->
-                    <form action="{{ url('note/'.$note->id .'/edit')}}" method="GET" class="form-horizontal">
+                    <form action="{{ url('/index/'.$note->id)}}" method="POST" class="form-horizontal">
                     @csrf()
 
                     <!-- Blog Note -->
